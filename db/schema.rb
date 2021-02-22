@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_163013) do
+ActiveRecord::Schema.define(version: 2021_02_22_175133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_22_163013) do
     t.boolean "is_organic"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "farm_name"
   end
 
   create_table "services", force: :cascade do |t|

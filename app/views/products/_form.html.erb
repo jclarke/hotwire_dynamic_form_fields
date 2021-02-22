@@ -25,8 +25,14 @@
   <% if !product.product_type.nil? && product.product_type == "Chips" %>
     <div class="form-group">
       <%= form.label :is_organic %>
-      <%= form.check_box :is_organic, class: 'form-control' %>
+      <%= form.check_box :is_organic, class: 'form-control' , data: {:controller => "sub-action", :action => "change->sub-action#updateAndSubmit", "sub-action-frame-name-value" => "product_form", "sub-action-sub-action-value" => "refresh"}%>
     </div>
+    
+  <% if product.is_organic %>
+    <div class="form-group">
+      <%= form.label :farm_name %>
+      <%= form.text_field :farm_name, class: 'form-control' %>
+    <% end %>
   <% end %>
 
     <div class="form-group">
