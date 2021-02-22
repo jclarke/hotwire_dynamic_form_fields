@@ -1,0 +1,48 @@
+<%= turbo_frame_tag "product_form" , :target => "_top" do %>
+  <%= form_with(model: product) do |form| %>
+    <% if product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+  
+        <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label :product_type %>
+      <%= form.select :product_type, ["","Shoe","Chips"], {}, class: 'form-control', data: {:controller => "sub-action", :action => "change->sub-action#updateAndSubmit", "sub-action-frame-name-value" => "product_form", "sub-action-sub-action-value" => "refresh"} %>
+    </div>
+  
+  <% if !product.product_type.nil? && product.product_type == "Chips" %>
+    <div class="form-group">
+      <%= form.label :is_organic %>
+      <%= form.check_box :is_organic, class: 'form-control' %>
+    </div>
+  <% end %>
+
+    <div class="form-group">
+      <% if product.persisted? %>
+        <div class="float-right">
+          <%= link_to 'Destroy', product, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+  
+      <%= form.submit class: 'btn btn-primary', data: {"disable-with" => "Please Wait...", :controller => "sub-action", :action => "click->sub-action#update", "sub-action-new-target-value" => "_top", "sub-action-frame-name-value" => "product_form"} %>
+  
+      <% if product.persisted? %>
+        <%= link_to "Cancel", product, class: "btn btn-link" %>
+      <% else %>
+        <%= link_to "Cancel", products_path, class: "btn btn-link" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

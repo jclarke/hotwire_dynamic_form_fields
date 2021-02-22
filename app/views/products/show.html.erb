@@ -1,0 +1,21 @@
+<div class="page-header">
+  <%= link_to products_path, class: 'btn btn-default' do %>
+    All Products
+  <% end %>
+  <%= link_to edit_product_path(@product), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show product</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @product.name %></dd>
+
+  <dt>Product type:</dt>
+  <dd><%= @product.product_type %></dd>
+
+  <dt>Is organic:</dt>
+  <dd><%= @product.is_organic %></dd>
+
+</dl>
